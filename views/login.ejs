@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmelden</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Anmelden</h1>
+<form action="/auth/login" method="POST">
+    <label for="email">E-Mail:</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="password">Passwort:</label>
+    <input type="password" name="password" id="password" required>
+
+    <button type="submit">Anmelden</button>
+</form>
+<p>Noch keinen Account? <a href="/auth/register">Hier registrieren</a>.</p>
+</body>
+</html>
