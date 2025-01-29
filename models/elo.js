@@ -10,7 +10,7 @@ router.get("/new", (req, res) => {
 
 // Team speichern
 router.post("/", async (req, res) => {
-    const { Team } = req.body;
+    const {} = req.body;
     await Team.create({ name, players: [], elo: 1200 });
     res.redirect("/team");
 });
