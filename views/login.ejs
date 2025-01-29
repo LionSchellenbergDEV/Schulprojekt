@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anmelden</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lavishly+Yours&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<h1>Anmelden</h1>
+<header id="header">
+    <strong>Schulprojekt</strong>
+    <nav>
+        <a href="/">Startseite</a>
+        <a href="/auth/register">Registrieren</a>
+        <a href="/auth/login">Anmelden</a>
+    </nav>
+</header>
+<main>
 <form action="/auth/login" method="POST">
-    <label for="email">E-Mail:</label>
-    <input type="email" name="email" id="email" required>
+    <h1>Anmelden</h1>
 
-    <label for="password">Passwort:</label>
-    <input type="password" name="password" id="password" required>
+    <input type="email" name="email" id="email" placeholder="E-Mail Adresse" required>
+
+    <input type="password" name="password" id="password" placeholder="Passwort" required>
 
     <button type="submit">Anmelden</button>
 </form>

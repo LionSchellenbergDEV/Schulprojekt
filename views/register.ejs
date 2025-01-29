@@ -4,22 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrieren</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lavishly+Yours&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<h1>Registrieren</h1>
+<header id="header">
+    <strong>Schulprojekt</strong>
+    <nav>
+        <a href="/">Startseite</a>
+        <a href="/auth/register">Registrieren</a>
+        <a href="/auth/login">Anmelden</a>
+    </nav>
+</header>
+<main>
 <form action="/auth/register" method="POST">
-    <label for="username">Benutzername:</label>
-    <input type="text" name="username" id="username" required>
+    <h1>Registrieren</h1>
+    <input type="text" name="username" id="username" placeholder="Nutzername" required>
 
-    <label for="email">E-Mail:</label>
-    <input type="email" name="email" id="email" required>
+    <input type="email" name="email" id="email" placeholder="E-Mail Adresse" required>
 
-    <label for="password">Passwort:</label>
-    <input type="password" name="password" id="password" required>
+    <input type="password" name="password" id="password" placeholder="Passwort" required>
 
     <button type="submit">Registrieren</button>
 </form>
 <p>Schon registriert? <a href="/auth/login">Hier anmelden</a>.</p>
+</main>
 </body>
 </html>
