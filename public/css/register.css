@@ -1,0 +1,74 @@
+html, body {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    background: #150E56;
+    color: white;
+    font-family: "Playfair Display", serif;
+}
+header {
+    padding: 2% 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 92%;
+    min-width: 92%;
+    max-width: 92%;
+    background: #150E56;
+    color: white;
+    position: absolute;
+    z-index: 1;
+}
+header strong {
+    font-family: "Great Vibes", serif;
+    font-size: calc(10px + 2vmin);
+    font-weight: lighter;
+}
+nav {
+    width: 20%;
+    min-width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+main {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 4%;
+    background: white;
+    color: black;
+    border: transparent;
+    border-radius: 15px;
+    width: 25%;
+}
+form h1 {
+    margin: 0;
+}
+form input {
+    padding: 1vh 2vh;
+    margin-top: 4%;
+}
+form button {
+    padding: 1vh 2vh;
+    margin-top: 4%;
+}

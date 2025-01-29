@@ -1,9 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User');
+const User = require('../models/user');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const authMiddleware = require('../middleware/authMiddleware'); // Importiere die Middleware
+const renewTokenMiddleware = require('../middleware/renewTokenMiddleware');
+
+router.use(renewTokenMiddleware); // Token-Erneuerung auf allen Routen anwenden
 
 // GET: Registrierungsseite
 router.get('/register', (req, res) => {
@@ -29,6 +31,7 @@ router.post('/register', async (req, res) => {
 
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
+        document.cookie = "username=" + username;
 
         res.redirect('/auth/login'); // Nach der Registrierung zur Anmeldeseite
     } catch (err) {
@@ -68,7 +71,7 @@ router.post('/login', async (req, res) => {
         res.cookie('jwt', token, {
             httpOnly: true, // Cookie kann nur vom Server gelesen werden
             secure: process.env.NODE_ENV === 'production', // Nur in HTTPS (wenn production)
-            maxAge: 3600000, // 1 Stunde
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 Tage
         });
 
         res.redirect('/auth/profile'); // Weiterleitung zur geschützten Nutzerseite
@@ -78,7 +81,7 @@ router.post('/login', async (req, res) => {
     }
 });
 // GET: Nutzerseite (geschützt durch Middleware)
-router.get('/profile', authMiddleware, async (req, res) => {
+router.get('/profile',  async (req, res) => {
     try {
         const user = await User.findById(req.user.id); // Nutzer anhand der ID im Token abrufen
         if (!user) {
@@ -92,7 +95,7 @@ router.get('/profile', authMiddleware, async (req, res) => {
 });
 
 // POST: Nutzer aktualisieren (geschützt durch Middleware)
-router.post('/profile', authMiddleware, async (req, res) => {
+router.post('/profile',  async (req, res) => {
     const { username, email } = req.body;
     try {
         const user = await User.findById(req.user.id);

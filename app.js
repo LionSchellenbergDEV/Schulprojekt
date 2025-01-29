@@ -6,6 +6,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser'); // Cookie-Parser importieren
 dotenv.config();
 const app = express();
+require("dotenv").config();
+//const renewTokenMiddleware = require('./middleware/renewTokenMiddleware');
 
 // Middleware
 app.use(cookieParser()); // Cookie-Parser aktivieren
