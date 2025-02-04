@@ -1,0 +1,71 @@
+html, body {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    font-family: sans-serif;
+    margin: 0;
+    background: #150E56;
+    color: white;
+}
+header {
+    width: 82%;
+    min-width: 82%;
+    max-width: 82%;
+    margin: auto;
+    padding: 2% 4%;
+    display: flex;
+    justify-content: space-between;
+}
+main {
+    width: 82%;
+    min-width: 82%;
+    max-width: 82%;
+    margin: auto;
+    padding: 2% 4%;
+}
+main form {
+    width: 40%;
+    min-width: 40%;
+    max-width: 40%;
+    margin: auto;
+    margin-bottom: 8%;
+}
+main input {
+    width: 80%;
+    min-width: 80%;
+    max-width: 80%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 2% 4%;
+    border-right: none;
+    border: 1px solid white;
+}
+main button {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: white;
+    width: 15%;
+    min-width: 20%;
+    padding: 2% 4%;
+    border: 1px solid white;
+}
+main nav {
+    width: 40%;
+    min-width: 40%;
+    max-width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+}
+main input:focus {
+    outline: none;
+}
+main h3 {
+    margin-bottom: 4%;
+}

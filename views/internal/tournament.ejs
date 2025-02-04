@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lavishly+Yours&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<header id="header">
+    <strong>Schulprojekt</strong>
+    <nav>
+        <a href="/">Startseite</a>
+        <a href="/internal/tournament">Turnier</a>
+        <a href="/auth/profile">Profil</a>
+        <a href="/auth/logout">Abmelden</a>
+    </nav>
+
+</header>
+<main>
+    <h1>Spieler suchen</h1>
+    <form action="/auth/search" method="GET" style="display: inline;">
+        <input type="text" name="username" placeholder="Terminator" required><button type="submit">Suchen</button>
+    </form>
+</main>
+</body>
+</html>

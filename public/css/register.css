@@ -68,6 +68,10 @@ form input {
     padding: 1vh 2vh;
     margin-top: 4%;
 }
+form select {
+    padding: 1vh 2vh;
+    margin-top: 4%;
+}
 form button {
     padding: 1vh 2vh;
     margin-top: 4%;

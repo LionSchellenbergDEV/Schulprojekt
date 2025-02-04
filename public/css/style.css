@@ -23,6 +23,36 @@ header {
     background: #150E56;
     color: white;
 }
+
+header form {
+    width: 30%;
+    min-width: 30%;
+    max-width: 30%;
+    display: flex;
+    justify-content: center;
+}
+header form input {
+    width: 72%;
+    min-width: 72%;
+    max-width: 72%;
+    margin: 0;
+    padding: 2% 4%;
+    border-color: transparent;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+header form button {
+    width: 18%;
+    min-width: 18%;
+    max-width:18%;
+    padding: 2% 4%;
+    text-align: center;
+    border-left: none;
+    border-color: transparent;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: white;
+}
 header strong {
     font-family: "Great Vibes", serif;
     font-size: calc(10px + 2vmin);
@@ -107,12 +137,12 @@ main {
     margin-top: 0;
 
 }
-#info-text {
+.info-text {
     width: 50%;
     min-width: 50%;
     max-width: 50%;
 }
-#info-text button {
+.info-text button {
     padding: 2% 4%;
     background: #FAA300;
     color: #150E56;
@@ -136,4 +166,17 @@ main {
     display: flex;
     justify-content: center;
     align-content: center;
+}
+.content-wrapper {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.content-wrapper p {
+    display: flex;
+    flex-direction: row;
+    font-size: x-large;
+    margin-top: 0;
 }

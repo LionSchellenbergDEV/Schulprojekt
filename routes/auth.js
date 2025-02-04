@@ -14,8 +14,8 @@ router.get('/register', (req, res) => {
 
 // POST: Nutzer registrieren
 router.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
-
+    const { username, email, character, password } = req.body;
+    const elo = 0;
     if (!username || !email || !password) {
         return res.status(400).send('Alle Felder sind erforderlich');
     }
@@ -29,9 +29,10 @@ router.post('/register', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const newUser = new User({ username, email, password: hashedPassword });
+        const newUser = new User({ username, email, password: hashedPassword, character, elo });
         await newUser.save();
-        document.cookie = "username=" + username;
+        res.cookie("username", username);
+
 
         res.redirect('/auth/login'); // Nach der Registrierung zur Anmeldeseite
     } catch (err) {
@@ -64,38 +65,39 @@ router.post('/login', async (req, res) => {
             return res.status(400).send('Ungültige Anmeldedaten');
         }
 
-        // JWT-Token generieren
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        // Token in Cookie speichern
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
         res.cookie('jwt', token, {
-            httpOnly: true, // Cookie kann nur vom Server gelesen werden
-            secure: process.env.NODE_ENV === 'production', // Nur in HTTPS (wenn production)
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 Tage
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 604800000,
         });
 
-        res.redirect('/auth/profile'); // Weiterleitung zur geschützten Nutzerseite
+        res.redirect('/internal'); // Statt /auth/profile zum internen Bereich
     } catch (err) {
         console.error(err);
         res.status(500).send('Server-Fehler');
     }
 });
+
+const authMiddleware = require('../middleware/authMiddleware'); // Middleware zur Authentifizierung
 // GET: Nutzerseite (geschützt durch Middleware)
-router.get('/profile',  async (req, res) => {
+router.get('/internal', authMiddleware, async (req, res) => {
     try {
-        const user = await User.findById(req.user.id); // Nutzer anhand der ID im Token abrufen
+        const user = await User.findById(req.user.id);
         if (!user) {
             return res.status(404).send('Nutzer nicht gefunden');
         }
-        res.render('profile', { user }); // Daten an die EJS-Ansicht übergeben
+        res.render('/internal/dashboard', { user });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server-Fehler');
     }
 });
 
+
+
 // POST: Nutzer aktualisieren (geschützt durch Middleware)
-router.post('/profile',  async (req, res) => {
+router.post('/profile', authMiddleware,  async (req, res) => {
     const { username, email } = req.body;
     try {
         const user = await User.findById(req.user.id);
@@ -125,4 +127,37 @@ router.get('/logout', (req, res) => {
     res.clearCookie('jwt'); // JWT-Cookie löschen
     res.redirect('/auth/login'); // Zur Login-Seite umleiten
 });
+
+
+
+// GET: Nutzer nach Namen suchen (nur für angemeldete Nutzer)
+router.get('/search', async (req, res) => {
+    const { username } = req.query;
+
+    if (!username) {
+        return res.status(400).send('Bitte geben Sie einen Nutzernamen ein');
+    }
+
+    try {
+        const users = await User.find({ username: { $regex: username, $options: 'i' } }); // Suche nach Teilstring (case-insensitive)
+
+        if (users.length === 0) {
+            return res.status(404).send('Kein Nutzer gefunden');
+        }
+
+        res.render('searchResults', { users }); // Rendert die Suchergebnisse
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server-Fehler');
+    }
+});
+
+//Turnier
+router.get('/internal/tournament', authMiddleware, (req, res) => {
+    res.render('internal/tournament');
+});
+
+
+
+
 module.exports = router;

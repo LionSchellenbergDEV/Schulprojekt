@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true })); // URL-encoded Daten parsen
 app.use(bodyParser.urlencoded({ extended: false })); // Formulardaten parsen
 app.use(express.static(path.join(__dirname, 'public'))); // Statische Dateien
 app.set('view engine', 'ejs'); // EJS als Template-Engine setzen
+app.set('views', path.join(__dirname, 'views'));
 
 // MongoDB-Verbindung
 mongoose
@@ -26,12 +27,16 @@ mongoose
 // Routen
 const authRoutes = require('./routes/auth');
 app.use('/auth', require('./routes/auth')); // Routen importieren
+const internalRoutes = require('./routes/internal');
+app.use('/internal', internalRoutes);
 
 
 // Startseite (Landing Page)
 app.get('/', (req, res) => {
     res.render('index'); // Rendert die Datei views/index.ejs
 });
+
+
 
 // Server starten
 const PORT = process.env.PORT || 3000;
